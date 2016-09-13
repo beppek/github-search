@@ -6,9 +6,14 @@ import  'rxjs/add/operator/map';
 export class GithubService {
     private username: string;
 
-    constructor() {
+    constructor(private _http: Http) {
         console.log("Github Service Ready...");
 
         this.username = 'beppek';
+    }
+
+    getUser() {
+        return this._http.get('http://api.github.com/users/' + this.username)
+            .map(res => res.json());
     }
 }
